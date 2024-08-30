@@ -13,6 +13,8 @@ namespace allianzServer.Models
         public DbSet<PoliceTable>? PoliceTable { get; set; }
         public DbSet<OdemeTable>? OdemeTable { get; set; }
         public DbSet<TeminatTable>? TeminatTable { get; set; }
+        public DbSet<PoliceTeminatTable>? PoliceTeminatTable { get; set; }
+
 
 
 
