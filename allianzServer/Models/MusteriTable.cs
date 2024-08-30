@@ -9,5 +9,6 @@
         public DateTime? DogumTarih { get; set; }
         public string? Tel { get; set; }
         public string? Eposta { get; set; }
+
     }
 }

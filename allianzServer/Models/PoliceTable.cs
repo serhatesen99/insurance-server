@@ -8,7 +8,9 @@
         public string? Yer { get; set; }
         public string? Sebeb { get; set; }
 
+        public int? MusteriId { get; set; }
 
+        public int? OdemeId { get; set; }
 
 
 

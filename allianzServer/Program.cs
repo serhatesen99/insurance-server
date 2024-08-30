@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Use the CORS policy
+
 app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();

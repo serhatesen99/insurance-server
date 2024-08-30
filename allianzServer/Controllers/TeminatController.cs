@@ -7,18 +7,19 @@ namespace allianzServer.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PoliceController : ControllerBase
+    public class TeminatController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public PoliceController(AppDbContext context)
+        public TeminatController(AppDbContext context)
         {
             _context = context;
         }
 
+
         // POST 
         [HttpPost("Home")]
-        public async Task<IActionResult> Home([FromBody] PoliceTable model)
+        public async Task<IActionResult> Home([FromBody] TeminatTable model)
         {
             if (!ModelState.IsValid)
             {
@@ -27,7 +28,7 @@ namespace allianzServer.Controllers
 
             try
             {
-                _context.PoliceTable.Add(model);
+                _context.TeminatTable.Add(model);
                 await _context.SaveChangesAsync();
                 return Ok(model);
             }
@@ -37,19 +38,18 @@ namespace allianzServer.Controllers
             }
         }
 
+
         // GET 
-        [HttpGet("Home/{id}")]
-        public async Task<IActionResult> GetPolice(int id)
+        [HttpGet("Home")]
+        public async Task<IActionResult> GetTeminat()
         {
-            var police = await _context.PoliceTable.FindAsync(id);
-            if (police == null)
+            var teminatList = await _context.TeminatTable.ToListAsync();
+            if (teminatList == null || !teminatList.Any())
             {
-                return NotFound("Müşteri bulunamadı.");
+                return NotFound("Teminat bulunamadı.");
             }
-            return Ok(police);
+            return Ok(teminatList);
         }
+
     }
 }
-
-
-
