@@ -48,6 +48,30 @@ namespace allianzServer.Controllers
             }
             return Ok(police);
         }
+
+
+
+        // DELETE
+        [HttpDelete("Home/{id}")]
+        public async Task<IActionResult> DeletePolice(int id)
+        {
+            var police = await _context.PoliceTable.FindAsync(id);
+            if (police == null)
+            {
+                return NotFound("Poliçe bulunamadı.");
+            }
+
+            try
+            {
+                _context.PoliceTable.Remove(police);
+                await _context.SaveChangesAsync();
+                return Ok("Poliçe başarıyla silindi.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }
 

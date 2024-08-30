@@ -51,5 +51,28 @@ namespace allianzServer.Controllers
             return Ok(teminatList);
         }
 
+
+        // DELETE
+        [HttpDelete("Home/{id}")]
+        public async Task<IActionResult> DeleteTeminat(int id)
+        {
+            var teminat = await _context.TeminatTable.FindAsync(id);
+            if (teminat == null)
+            {
+                return NotFound("Teminat bulunamadı.");
+            }
+
+            try
+            {
+                _context.TeminatTable.Remove(teminat);
+                await _context.SaveChangesAsync();
+                return Ok("Teminat başarıyla silindi.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
     }
 }

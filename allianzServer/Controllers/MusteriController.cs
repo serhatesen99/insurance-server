@@ -48,6 +48,28 @@ namespace allianzServer.Controllers
             }
             return Ok(musteri);
         }
+
+        // DELETE
+        [HttpDelete("Home/{id}")]
+        public async Task<IActionResult> DeleteMusteri(int id)
+        {
+            var musteri = await _context.MusteriTable.FindAsync(id);
+            if (musteri == null)
+            {
+                return NotFound("Müþteri bulunamadý.");
+            }
+
+            try
+            {
+                _context.MusteriTable.Remove(musteri);
+                await _context.SaveChangesAsync();
+                return Ok("Müþteri baþarýyla silindi.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }
 

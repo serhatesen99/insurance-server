@@ -48,6 +48,28 @@ namespace allianzServer.Controllers
             }
             return Ok(odeme);
         }
+
+        // DELETE
+        [HttpDelete("Home/{id}")]
+        public async Task<IActionResult> DeleteOdeme(int id)
+        {
+            var odeme = await _context.OdemeTable.FindAsync(id);
+            if (odeme == null)
+            {
+                return NotFound("Ödeme bilgisi bulunamadı.");
+            }
+
+            try
+            {
+                _context.OdemeTable.Remove(odeme);
+                await _context.SaveChangesAsync();
+                return Ok("Ödeme bilgisi başarıyla silindi.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }
 
